@@ -32,7 +32,7 @@ CREATE TABLE customers (
 	id SERIAL,
 	first_name VARCHAR(60) NOT NULL,
 	last_name VARCHAR(60) NOT NULL,
-	phone VARCHAR(60) UNIQUE,
+	phone VARCHAR(30) UNIQUE,
 	city VARCHAR(10) NOT NULL,
 	user_id INT NOT NULL,
 	PRIMARY KEY (id),
@@ -82,14 +82,16 @@ CREATE TABLE tags (
 
 CREATE TABLE products (
 	id SERIAL PRIMARY KEY,
-	name VARCHAR(40) NOT NULL,
-	description VARCHAR(120) NOT NULL,
+	product_name VARCHAR(40) NOT NULL,
+	description VARCHAR(150) NOT NULL,
 	state BOOL NOT NULL DEFAULT '0',
 	weight NUMERIC(5, 2) NOT NULL DEFAULT 0.00,
 	brand_id INT REFERENCES brands (id),
 	product_type_id INT REFERENCES product_types (id),
 	vendor INT REFERENCES vendors (id),
-	category_id INT REFERENCES categories (id)
+	category_id INT REFERENCES categories (id),
+	created_at TIMESTAMP NOT NULL,
+	updated_at TIMESTAMP
 );
 
 CREATE TABLE product_tag (
@@ -104,10 +106,10 @@ CREATE TABLE product_images (
 	product_id INT NOT NULL REFERENCES products (id)
 );
 
-CREATE TABLE branchs (
+CREATE TABLE branches (
 	id SERIAL PRIMARY KEY,
 	branch_name VARCHAR(40) NOT NULL,
-	address VARCHAR(120) NOT NULL,
+	address VARCHAR(140) NOT NULL,
 	created_at TIMESTAMP NOT NULL,
 	updated_at TIMESTAMP,
 	city_id INT NOT NULL REFERENCES cities (id)
@@ -115,7 +117,7 @@ CREATE TABLE branchs (
 
 CREATE TABLE inventory (
 	product_id INT NOT NULL REFERENCES products (id),
-	branch_id INT NOT NULL REFERENCES branchs (id),
+	branch_id INT NOT NULL REFERENCES branches (id),
 	PRIMARY KEY (product_id, branch_id)
 );
 
@@ -134,9 +136,9 @@ CREATE TABLE product_collection (
 );
 
 CREATE TABLE wishlists (
-	created_at TIMESTAMP NOT NULL,
 	customer_id INT NOT NULL REFERENCES customers (id),
 	product_id INT NOT NULL REFERENCES products (id),
+	created_at TIMESTAMP NOT NULL,
 	PRIMARY KEY (customer_id, product_id)
 );
 
@@ -171,9 +173,9 @@ CREATE TABLE shipping_methods (
 
 CREATE TABLE discounts (
 	id SERIAL PRIMARY KEY,
-	discount_name VARCHAR(30),
+	discount_name VARCHAR(30) NOT NULL,
 	discount_description VARCHAR(255) NOT NULL,
-	discount_type BOOL NOT NULL DEFAULT '0', -- 0 = amount, 1 = percentage
+	discount_type BOOL NOT NULL DEFAULT '0', -- 0 = fixed, 1 = percentage
 	value NUMERIC(5, 2) NOT NULL,
 	allowed_uses SMALLINT NOT NULL DEFAULT 0,
 	start_date TIMESTAMP NOT NULL,
@@ -183,7 +185,7 @@ CREATE TABLE discounts (
 
 CREATE TABLE orders (
 	id SERIAL PRIMARY KEY,
-	branch_id INT NOT NULL REFERENCES branchs (id),
+	branch_id INT NOT NULL REFERENCES branches (id),
 	curstomer_id INT NOT NULL REFERENCES customers (id),
 	order_date TIMESTAMP NOT NULL,
 	shipping_method_id INT NOT NULL REFERENCES shipping_methods (id),
