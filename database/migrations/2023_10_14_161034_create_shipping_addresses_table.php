@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('shipping_address1', 80);
             $table->string('shipping_address2', 80)->nullable();
 
-            $table->foreignId('city_id')->references('id')->on('cities');
+            $table->unsignedSmallInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->foreignId('customer_id')->constrained();
         });
     }

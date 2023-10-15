@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('branch_name', 40);
             $table->string('address', 140);
-            $table->foreignId('city_id')->references('id')->on('cities');
+            $table->unsignedSmallInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->timestamps();
         });
     }

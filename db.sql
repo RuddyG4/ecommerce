@@ -28,20 +28,21 @@ CREATE TABLE "permission_role" (
 	PRIMARY KEY (permission_id, role_id)
 );
 
+CREATE TABLE cities (
+	id SERIAl PRIMARY KEY,
+	city_name VARCHAR(10) NOT NULL
+);
+
 CREATE TABLE customers (
 	id SERIAL,
 	first_name VARCHAR(60) NOT NULL,
 	last_name VARCHAR(60) NOT NULL,
 	phone VARCHAR(30) UNIQUE,
-	city VARCHAR(10) NOT NULL,
+	city_id INT NOT NULL,
 	user_id INT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_id) REFERENCES users (id)
-);
-
-CREATE TABLE cities (
-	id SERIAl PRIMARY KEY,
-	city_name VARCHAR(10) NOT NULL
+	FOREIGN KEY (user_id) REFERENCES users (id),
+	FOREIGN KEY (city_id) REFERENCES cities (id)
 );
 
 CREATE TABLE shipping_addresses (

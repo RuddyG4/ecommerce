@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('first_name', 60);
             $table->string('last_name', 60);
             $table->string('phone', 30)->unique()->nullable();
-            $table->string('city', 10);
+            $table->unsignedSmallInteger('city_id')->nullable();
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

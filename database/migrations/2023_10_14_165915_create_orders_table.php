@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('branch_id')->constrained();
             $table->foreignId('shipping_method_id')->constrained();
-            $table->foreignId('city_id')->references('id')->on('cities');
+            $table->unsignedSmallInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->foreignId('discount_id')->constrained();
         });
     }
