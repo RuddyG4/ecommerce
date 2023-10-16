@@ -35,11 +35,10 @@ function submit() {
 </script>
 
 <template>
-    <AppLayout title="Users">
+    <AppLayout title="Show user">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Create user
-                {{ disableSubmit }}
+                Show user
             </h2>
         </template>
 

@@ -71,6 +71,7 @@ function submit() {
                                         {{ role.name }}
                                     </option>
                                 </select>
+                                <InputError class="mt-2" :message="form.errors.role_id" />
                             </div>
 
                             <div class="mt-4">

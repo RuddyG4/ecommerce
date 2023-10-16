@@ -58,6 +58,24 @@ const logout = () => {
                                     Users
                                 </NavLink>
                             </div>
+                            
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('roles.index')" :active="route().current('roles*')">
+                                    Roles
+                                </NavLink>
+                            </div>
+                            
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('products.index')" :active="route().current('products*')">
+                                    Products
+                                </NavLink>
+                            </div>
+                            
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <NavLink :href="route('orders.index')" :active="route().current('orders*')">
+                                    Orders
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -201,8 +219,20 @@ const logout = () => {
                             Dashboard
                         </ResponsiveNavLink>
                         
-                        <ResponsiveNavLink :href="route('users.index')" :active="route().current('users.index')">
+                        <ResponsiveNavLink :href="route('users.index')" :active="route().current('users*')">
                             Users
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('roles.index')" :active="route().current('roles*')">
+                            Roles
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('products.index')" :active="route().current('products*')">
+                            Products
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink :href="route('orders.index')" :active="route().current('orders*')">
+                            Orders
                         </ResponsiveNavLink>
                     </div>
 
