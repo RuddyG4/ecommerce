@@ -20,8 +20,9 @@ return new class extends Migration
 
             $table->foreignId('brand_id')->constrained();
             $table->foreignId('product_type_id')->references('id')->on('product_types');
-            $table->foreignId('vendor')->constrained();
-            $table->foreignId('category_id')->references('id')->on('categories');
+            $table->unsignedSmallInteger('vendor_id')->nullable();
+            $table->foreign('vendor_id')->references('id')->on('vendors');
+            $table->foreignId('category_id')->nullable()->references('id')->on('categories');
 
             $table->timestamps();
         });
