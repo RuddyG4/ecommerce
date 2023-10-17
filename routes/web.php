@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StoreController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,3 +36,6 @@ Route::middleware([
     Route::resource('/branches', App\Http\Controllers\Business\BranchController::class);
     Route::resource('/inventory', App\Http\Controllers\Business\InventoryController::class);
 });
+
+Route::get('/store', [StoreController::class, 'index'])->name('store.index');
+

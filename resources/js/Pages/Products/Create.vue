@@ -61,7 +61,7 @@ function submit() {
                             
                             <div>
                                 <InputLabel for="product_image" class="mt-2" value="Product images" />
-                                <input id="product_image" type="file" class="w-full mb-4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                <input id="product_image" @input="form.product_image = $event.target.files[0]" type="file" class="w-full mb-4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             </div>
 
                             <div>
