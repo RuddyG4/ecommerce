@@ -50,6 +50,10 @@ class ProductController extends Controller
             'category_id' => 'required|integer',
         ]);
 
+        if (request()->hasFile('product_image')) {
+            // $data['product_image'] = request()->file('product_image')->store('products');
+        }
+
         $data['description'] = $data['product_description'];
         unset($data['product_description']);
 

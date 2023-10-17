@@ -29,4 +29,10 @@ class InventoryController extends Controller
             'products' => $products,
         ]);
     }
+
+    public function show($inventoryID)
+    {
+        $productInventory = Inventory::where('id', $inventoryID)->with('product')->first();
+        return Inertia::render('Inventory/Show', compact('productInventory'));
+    }
 }

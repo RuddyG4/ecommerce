@@ -46,8 +46,8 @@ function updateBranchData() {
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg dark:text-white">
                     <div
                         class="p-6 lg:p-8 bg-white dark:bg-gray-800 dark:bg-gradient-to-bl dark:from-gray-700/50 dark:via-transparent border-b border-gray-200 dark:border-gray-700">
-                        <div class="mt-4">
-                            <label for="branch_id" class="mr-2">Seleccione una sucursal</label>
+                        <div class="my-4">
+                            <label for="branch_id" class="mr-2">Sucursal actual</label>
                             <select v-model="form.branch_id" id="branch_id"
                                 class="w-1/2 mr-2 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
                                 @change="updateBranchData">
@@ -55,12 +55,6 @@ function updateBranchData() {
                                     {{ branch.branch_name }}
                                 </option>
                             </select>
-
-                            <Link :href="route('users.create')">
-                            <PrimaryButton type="button" class="mb-6">
-                                aplicar
-                            </PrimaryButton>
-                            </Link>
 
                             <InputError class="mt-2" :message="form.errors.branch_id" />
                         </div>
@@ -82,7 +76,7 @@ function updateBranchData() {
                                     <td class="p-2 whitespace-nowrap">{{ product.sale_price }}</td>
                                     <td class="p-2 whitespace-nowrap">{{ product.purchase_price }}</td>
                                     <td>
-                                        <Link :href="route('inventory.show', { inventory: 1 })"
+                                        <Link :href="route('inventory.show', { inventory: product.id })"
                                             class="bg-blue-200 text-slate-800 font-bold py-1 px-4 rounded mr-2')">
                                         Edit
                                         </Link>

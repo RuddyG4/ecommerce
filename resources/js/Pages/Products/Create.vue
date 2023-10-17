@@ -9,6 +9,7 @@ import TextInput from '@/Components/TextInput.vue';
 const form = useForm({
     product_name: '',
     product_description: '',
+    product_image: '',
     state: 0,
     weight: '',
     brand_id: '',
@@ -52,10 +53,15 @@ function submit() {
                             </div>
 
                             <div>
-                                <InputLabel for="product_description" value="Product description" />
+                                <InputLabel for="product_description" class="mt-2" value="Product description" />
                                 <TextInput id="product_description" v-model="form.product_description" type="text" class="mt-1 block w-full"
                                     required autocomplete="product_description" />
                                 <InputError class="mt-2" :message="form.errors.product_description" />
+                            </div>
+                            
+                            <div>
+                                <InputLabel for="product_image" class="mt-2" value="Product images" />
+                                <input id="product_image" type="file" class="w-full mb-4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                             </div>
 
                             <div>
