@@ -55,7 +55,7 @@ class Product extends Model
 
     public function branches(): BelongsToMany
     {
-        return $this->belongsToMany(Branch::class);
+        return $this->belongsToMany(Branch::class, 'inventory');
     }
 
     public function collections(): BelongsToMany

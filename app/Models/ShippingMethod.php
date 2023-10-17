@@ -9,9 +9,11 @@ class ShippingMethod extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
-        'shipping_name',
-        'shipping_description',
+        'method_name',
+        'method_description',
         'price_per_kg',
         'price_per_km'
     ];

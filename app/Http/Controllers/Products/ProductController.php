@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('product_type')->paginate();
+        $products = Product::with('productType')->paginate();
         return Inertia::render('Products/Index', compact('products'));
     }
 
@@ -39,7 +39,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'product_name' => 'required|string|max:40',
+            'product_description' => 'required|string|max:150',
+            'state' => 'required|boolean',
+            'weight' => 'required|numeric|max:999.99|min:0.01|decimal:0,2',
+            'brand_id' => 'required|integer',
+            'product_type_id' => 'required|integer',
+            'vendor_id' => 'required|integer',
+            'category_id' => 'required|integer',
+        ]);
+
+        $data['description'] = $data['product_description'];
+        unset($data['product_description']);
+
+        Product::create($data);
+
+        return redirect()->route('products.index');
     }
 
     /**

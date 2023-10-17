@@ -119,6 +119,12 @@ CREATE TABLE branches (
 CREATE TABLE inventory (
 	product_id INT NOT NULL REFERENCES products (id),
 	branch_id INT NOT NULL REFERENCES branches (id),
+	stock SMALLINT NOT NULL DEFAULT 0,
+	sale_price NUMERIC(8, 2) NOT NULL DEFAULT 0.00,
+	purchase_price NUMERIC(8, 2) NOT NULL DEFAULT 0.00,
+	created_at TIMESTAMP NOT NULL,
+	updated_at TIMESTAMP,
+
 	PRIMARY KEY (product_id, branch_id)
 );
 

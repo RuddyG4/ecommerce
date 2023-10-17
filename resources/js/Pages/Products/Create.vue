@@ -9,7 +9,7 @@ import TextInput from '@/Components/TextInput.vue';
 const form = useForm({
     product_name: '',
     product_description: '',
-    state: '',
+    state: 0,
     weight: '',
     brand_id: '',
     product_type_id: '',
@@ -59,12 +59,22 @@ function submit() {
                             </div>
 
                             <div>
-                                <InputLabel for="weight" value="Product weight" />
-                                <TextInput id="weight" v-model="form.weight" type="number" class="mt-1 block w-full"
+                                <InputLabel for="weight" value="Product weight (Kg)" />
+                                <TextInput id="weight" v-model="form.weight" type="number" step="0.01" class="mt-1 block w-full"
                                     required autocomplete="weight" />
                                 <InputError class="mt-2" :message="form.errors.weight" />
                             </div>
 
+                            <div class="mt-4">
+                                <InputLabel for="state" value="State" />
+                                <select v-model="form.state" id="state"
+                                    class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                    <option value="0" selected>Activo</option>
+                                    <option value="1">Inactivo</option>
+                                </select>
+                                <InputError class="mt-2" :message="form.errors.state" />
+                            </div>
+                            
                             <div class="mt-4">
                                 <InputLabel for="brand_id" value="Brand" />
                                 <select v-model="form.brand_id" id="brand_id"

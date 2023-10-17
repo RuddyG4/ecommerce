@@ -46,7 +46,7 @@ class BrandSeeder extends Seeder
         ]);
         
         Brand::create([
-            'brand_name' => 'Adidas Glam',
+            'brand_name' => 'Adidas',
         ]);
         
         Brand::create([

@@ -65,5 +65,9 @@ class ProductTypeSeeder extends Seeder
             'name' => 'Lenceria',
         ]);
         
+        ProductType::create([
+            'name' => 'Calzado',
+        ]);
+        
     }
 }
