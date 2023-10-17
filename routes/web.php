@@ -32,4 +32,6 @@ Route::middleware([
     Route::resource('/roles', App\Http\Controllers\Users\RoleController::class);
     Route::resource('/products', App\Http\Controllers\Products\ProductController::class);
     Route::resource('/orders', App\Http\Controllers\UserController::class);
+    Route::resource('/branches', App\Http\Controllers\Business\BranchController::class);
+    Route::resource('/inventory', App\Http\Controllers\Business\InventoryController::class);
 });
