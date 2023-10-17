@@ -40,9 +40,9 @@ defineProps({
                             </thead>
                             <tbody class="text-sm divide-y divide-gray-100">
                                 <tr v-for="product in products.data" :key="product.id">
-                                    <td class="p-2 whitespace-nowrap">{{ product.product_name }}</td>
+                                    <td class="p-2 whitespace-nowrap"><b class="cursor-pointer"><u>{{ product.product_name }}</u></b></td>
                                     <td class="p-2 whitespace-nowrap">{{ product.description }}</td>
-                                    <td class="p-2 whitespace-nowrap">{{ product.state }}</td>
+                                    <td class="p-2 whitespace-nowrap">{{ product.state == 0 ? 'Active' : 'Inactive' }}</td>
                                     <td class="p-2 whitespace-nowrap">{{ product.product_type.name }}</td>
                                     <td>
                                         <Link :href="route('products.show', { product: product.id })" class="bg-blue-200 text-slate-800 font-bold py-1 px-4 rounded mr-2')">
