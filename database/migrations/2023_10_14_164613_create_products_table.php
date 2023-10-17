@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('product_name', 40);
             $table->string('description', 150);
+            $table->string('image_path')->nullable();
             $table->boolean('state')->default('0');
             $table->decimal('weight', 5, 2)->default(0.00);
 

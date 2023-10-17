@@ -51,7 +51,7 @@ class ProductController extends Controller
         ]);
 
         if (request()->hasFile('product_image')) {
-            // $data['product_image'] = request()->file('product_image')->store('products');
+            $data['image_path'] = $request->file('product_image')->store('uploads', 'public');
         }
 
         $data['description'] = $data['product_description'];
@@ -65,9 +65,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        $brands = Brand::all();
+        $product_types = ProductType::all();
+        $vendors = Vendor::all();
+        $categories = Category::all();
+        return Inertia::render('Products/Show', compact('brands', 'product_types', 'vendors', 'categories', 'product'));
     }
 
     /**
@@ -81,9 +85,28 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->validate([
+            'product_name' => 'required|string|max:40',
+            'product_description' => 'required|string|max:150',
+            'state' => 'required|boolean',
+            'weight' => 'required|numeric|max:999.99|min:0.01|decimal:0,2',
+            'brand_id' => 'required|integer',
+            'product_type_id' => 'required|integer',
+            'vendor_id' => 'required|integer',
+            'category_id' => 'required|integer',
+        ]);
+
+        if (request()->hasFile('product_image')) {
+            $data['image_path'] = $request->file('product_image')->store('uploads', 'public');
+        }
+
+        $data['description'] = $data['product_description'];
+        unset($data['product_description']);
+
+        $product->update($data);
+        return redirect()->route('products.index');
     }
 
     /**
