@@ -40,20 +40,20 @@
         <div class="offcanvas__close">+</div>
         <ul class="offcanvas__widget">
             <li><span class="icon_search search-switch"></span></li>
-            <li><a href="#"><span class="icon_heart_alt"></span>
+            <li><a href="{{ url('/store/wishlist') }}"><span class="icon_heart_alt"></span>
                     <div class="tip">2</div>
                 </a></li>
-            <li><a href="#"><span class="icon_bag_alt"></span>
+            <li><a href="{{ url('/store/cart') }}"><span class="icon_bag_alt"></span>
                     <div class="tip">2</div>
                 </a></li>
         </ul>
         <div class="offcanvas__logo">
-            <a href="./index.html"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
+            <a href="{{ url('/store') }}"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
+            <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('register') }}">Register</a>
         </div>
     </div>
     <!-- Offcanvas Menu End -->
@@ -64,25 +64,20 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
+                        <a href="{{ url('/store') }}"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-7">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Home</a></li>
-                            <li><a href="#">Women’s</a></li>
-                            <li><a href="#">Men’s</a></li>
-                            <li><a href="./shop.html">Shop</a></li>
+                            <li class="active"><a href="{{ url('/store') }}">Home</a></li>
+                            <li><a href="{{ url('/store/catalogue') }}">Shop</a></li>
                             <li><a href="#">Pages</a>
                                 <ul class="dropdown">
-                                    <li><a href="./product-details.html">Product Details</a></li>
-                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
-                                    <li><a href="./checkout.html">Checkout</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="{{ url('/store/cart') }}">Shop Cart</a></li>
+                                    <li><a href="{{ url('/store/checkout') }}">Checkout</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li>
                         </ul>
                     </nav>
@@ -90,17 +85,24 @@
                 <div class="col-lg-3">
                     <div class="header__right">
                         <div class="header__right__auth">
-                            <a href="#">Login</a>
-                            <a href="#">Register</a>
+                            <a href="{{ route('login') }}">Login</a>
+                            <a href="{{ route('register') }}">Register</a>
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
-                            <li><a href="#"><span class="icon_heart_alt"></span>
+                            <li>
+                                <a href="{{ url('/store/wishlist') }}">
+                                    <span class="icon_heart_alt"></span>
                                     <div class="tip">2</div>
-                                </a></li>
-                            <li><a href="#"><span class="icon_bag_alt"></span>
-                                    <div class="tip">2</div>
-                                </a></li>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/store/cart') }}">
+                                    <span class="icon_bag_alt"></span>
+                                    <!-- Cart counter -->
+                                    <livewire:cart-counter />
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -178,7 +180,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer__about">
                         <div class="footer__logo">
-                            <a href="./index.html"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
+                            <a href="{{ url('/store') }}"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                             cilisis.</p>
@@ -235,9 +237,10 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     <div class="footer__copyright__text">
                         <p>Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
-                            template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
-                                href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script> All rights reserved | This
+                            template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         </p>
                     </div>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

@@ -38,4 +38,8 @@ Route::middleware([
 });
 
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
+Route::get('/store/cart', [StoreController::class, 'cart'])->name('store.cart');
+Route::get('/store/checkout', [StoreController::class, 'checkout'])->name('store.checkout');
+Route::get('/store/catalogue', [StoreController::class, 'catalogue'])->name('store.catalogue');
+Route::get('/store/wishlist', [StoreController::class, 'wishlist'])->name('store.wishlist');
 
