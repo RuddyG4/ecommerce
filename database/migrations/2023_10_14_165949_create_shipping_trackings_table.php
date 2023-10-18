@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('shipping_trackings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('tracking_name', 40);
-            $table->string('description_name');
-            $table->timestamp('description_datetime');
+            $table->string('tracking_description');
+            $table->timestamp('tracking_datetime')->useCurrent();
 
             $table->foreignId('order_id')->constrained();
             $table->dropPrimary('shipping_trackings_id_primary');

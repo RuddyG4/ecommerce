@@ -62,11 +62,11 @@
                     <a href="#">Continue Shopping</a>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="cart__btn update__btn">
                     <a href="#"><span class="icon_loading"></span> Update cart</a>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row">
             <div class="col-lg-6">
@@ -85,7 +85,7 @@
                         <li>Subtotal <span>$ {{ $total }}</span></li>
                         <li>Total <span>$ {{ $total }}</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">Proceed to checkout</a>
+                    <a href="{{ route('store.checkout') }}" class="primary-btn">Proceed to checkout</a>
                 </div>
             </div>
         </div>

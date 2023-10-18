@@ -9,6 +9,8 @@ class ShippingTracking extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'order_id',
         'tracking_name',

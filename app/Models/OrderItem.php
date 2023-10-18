@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class OrderItem extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'order_id',
@@ -16,7 +17,7 @@ class OrderItem extends Model
         'qty',
         'tax_amount',
         'unit_price',
-        'subtotal',
+        'sub_total',
         'total',
     ];
 
