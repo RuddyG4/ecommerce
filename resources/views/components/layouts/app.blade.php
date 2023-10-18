@@ -84,10 +84,25 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="header__right">
+                        @guest
                         <div class="header__right__auth">
                             <a href="{{ route('login') }}">Login</a>
                             <a href="{{ route('register') }}">Register</a>
                         </div>
+                        @endguest
+
+                        @auth
+                        <div class="header__right__auth">
+                            <a>{{ Auth::user()->name }}</a>
+                            <a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit">
+                                        <i class="fa-solid fa-right-from-bracket"></i></a>
+                                    </button>
+                                </form>
+                        </div>
+                        @endauth
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
                             <li>

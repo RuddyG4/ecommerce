@@ -26,17 +26,21 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::middleware('admin')->group(function () {
+        
+        Route::get('/dashboard', function () {
+            return Inertia::render('Dashboard');
+        })->name('dashboard');
+        Route::resource('/users', App\Http\Controllers\UserController::class);
+        Route::resource('/roles', App\Http\Controllers\Users\RoleController::class);
+        Route::resource('/products', App\Http\Controllers\Products\ProductController::class);
+        Route::resource('/orders', App\Http\Controllers\OrderController::class);
+        Route::resource('/branches', App\Http\Controllers\Business\BranchController::class);
+        Route::resource('/inventory', App\Http\Controllers\Business\InventoryController::class);
+    });
+ });
+    
 
-    Route::resource('/users', App\Http\Controllers\UserController::class);
-    Route::resource('/roles', App\Http\Controllers\Users\RoleController::class);
-    Route::resource('/products', App\Http\Controllers\Products\ProductController::class);
-    Route::resource('/orders', App\Http\Controllers\OrderController::class);
-    Route::resource('/branches', App\Http\Controllers\Business\BranchController::class);
-    Route::resource('/inventory', App\Http\Controllers\Business\InventoryController::class);
-});
 
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/store/cart', [StoreController::class, 'cart'])->name('store.cart');
