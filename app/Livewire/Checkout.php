@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Mail\OrderUpdated;
 use App\Models\City;
 use App\Models\Inventory;
 use App\Models\Order;
@@ -10,6 +11,8 @@ use App\Models\ShippingMethod;
 use App\Models\ShippingTracking;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Checkout extends Component
@@ -41,8 +44,12 @@ class Checkout extends Component
             'order_instructions' => 'max:255',
             'phone' => 'nullable|string|max:20',
             'city_id' => 'required',
-            'guest_email' => 'email',
+            'guest_email' => 'required|email|max:60',
         ]);
+
+        if (!Auth::guest()) {
+            $data['customer_id'] = Auth::user()->customer->id;
+        }
 
         $cart = Cart::content();
 
@@ -74,12 +81,12 @@ class Checkout extends Component
         ]);
         $order->shippingTrackings()->save($track);
 
-
-
         foreach ($this->order_lines as $orderLine) {
             $orderLine->order_id = $order->id;
             $orderLine->save();
         }
+
+        Mail::to($data['guest_email'])->send(new OrderUpdated($order));
 
         $this->reset('order_lines');
         Cart::destroy();

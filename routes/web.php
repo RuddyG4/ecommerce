@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StoreController;
+use App\Models\Order;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,3 +44,7 @@ Route::get('/store/checkout', [StoreController::class, 'checkout'])->name('store
 Route::get('/store/catalogue', [StoreController::class, 'catalogue'])->name('store.catalogue');
 Route::get('/store/wishlist', [StoreController::class, 'wishlist'])->name('store.wishlist');
 
+Route::get('/email', function () {
+    $order = Order::find(1);
+    return view('emails.orders.order-updated', compact('order'));
+});

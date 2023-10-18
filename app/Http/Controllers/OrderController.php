@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderUpdated;
 use App\Models\Order;
 use App\Models\ShippingTracking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -63,6 +65,8 @@ class OrderController extends Controller
         $data['tracking_datetime'] = now();
         
         $order->shippingTrackings()->create($data);
+
+        Mail::to($order->guest_email)->send(new OrderUpdated($order));
         return redirect()->route('orders.index');
 
     }
