@@ -78,8 +78,8 @@ function submit() {
                                 <InputLabel for="state" value="State" />
                                 <select v-model="form.state" id="state"
                                     class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    <option value="0" :selected="form.state == 0">Activo</option>
-                                    <option value="1" :selected="form.state == 1">Inactivo</option>
+                                    <option value="false">Activo</option>
+                                    <option value="true">Inactivo</option>
                                 </select>
                                 <InputError class="mt-2" :message="form.errors.state" />
                             </div>
@@ -112,7 +112,7 @@ function submit() {
                                 <InputLabel for="vendor_id" value="Vendor" />
                                 <select v-model="form.vendor_id" id="vendor_id"
                                     class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    <option value="">Select a brand</option>
+                                    <option value="">Select a vendor</option>
                                     <option v-for="vendor in vendors" :key="vendor.id" :value="vendor.id">
                                         {{ vendor.vendor_name }}
                                     </option>
@@ -124,7 +124,7 @@ function submit() {
                                 <InputLabel for="category_id" value="Category" />
                                 <select v-model="form.category_id" id="category_id"
                                     class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    <option value="">Select a product type</option>
+                                    <option value="">Select a category</option>
                                     <option v-for="category in categories" :key="category.id" :value="category.id">
                                         {{ category.category_name }}
                                     </option>
@@ -135,7 +135,7 @@ function submit() {
                             <div class="flex items-center justify-end mt-4">
                                 <PrimaryButton class="ml-4" :class="{ 'opacity-25': form.processing }"
                                     :disabled="form.processing">
-                                    Create product
+                                    Update product
                                 </PrimaryButton>
                             </div>
                         </form>

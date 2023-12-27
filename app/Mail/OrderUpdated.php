@@ -31,7 +31,7 @@ class OrderUpdated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('orders@ashion.com', 'Ashion'),
+            from: new Address('onboarding@resend.dev', 'Ashion'),
             subject: 'Order Updated',
         );
     }

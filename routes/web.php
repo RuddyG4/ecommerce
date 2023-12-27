@@ -18,7 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return redirect('/dashboard');
+    return redirect('/store');
 });
 
 Route::middleware([

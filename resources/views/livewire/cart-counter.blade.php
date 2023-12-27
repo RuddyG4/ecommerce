@@ -1,3 +1,3 @@
 <div class="tip">
-    {{$cart_count}}
+    {{ $cart_count }}
 </div>

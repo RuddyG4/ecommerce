@@ -16,7 +16,9 @@
             <div class="row justify-content-md-center h-100">
                 <div class="card-wrapper">
                     <div class="brand">
-                        <a href="/store"><img src="assets/img/logo.png" alt=""></a>
+                        <div class="offcanvas__logo bg-white px-10 py-4 rounded">
+                            <a href="/store"><img src="assets/img/logo.png" alt=""></a>
+                        </div>
                     </div>
                     <div class="card fat">
                         <div class="card-body">

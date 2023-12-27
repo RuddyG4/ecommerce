@@ -1269,6 +1269,7 @@ ol {
 	transition: all, 0.5s;
 }
 
+/* Modified giro de boton */
 .product__hover li button {
 	font-size: 18px;
 	color: #111111;
@@ -1282,6 +1283,7 @@ ol {
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
 	transition: all, 0.5s;
+	border: 0;
 }
 
 .product__hover li a span {

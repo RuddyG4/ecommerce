@@ -52,14 +52,28 @@
         </div>
         <div id="mobile-menu-wrap"></div>
         <div class="offcanvas__auth">
+            @guest
             <a href="{{ route('login') }}">Login</a>
             <a href="{{ route('register') }}">Register</a>
+            @endguest
+
+            @auth
+            <a>{{ Auth::user()->name }}</a>
+            <a>
+                <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    <button type="submit" style="border: 0px; position: relative; display: inline-block; color:inherit">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </button>
+                </form>
+            </a>
+            @endauth
         </div>
     </div>
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
+    <header class="header fixed-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
@@ -95,12 +109,13 @@
                         <div class="header__right__auth">
                             <a>{{ Auth::user()->name }}</a>
                             <a>
-                                <form action="{{ route('logout') }}" method="POST">
+                                <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
                                     @csrf
-                                    <button type="submit">
-                                        <i class="fa-solid fa-right-from-bracket"></i></a>
+                                    <button type="submit" style="border: 0px; position: relative; display: inline-block; color:inherit">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
                                     </button>
                                 </form>
+                            </a>
                         </div>
                         @endauth
                         <ul class="header__right__widget">

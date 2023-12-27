@@ -32,11 +32,14 @@ const submit = () => {
             <AuthenticationCardLogo />
         </template>
 
-        <form @submit.prevent="submit">
+        <!-- <form @submit.prevent="submit"></form> -->
+        <form action="/register" method="POST">
+            <input type="hidden" name="_token" :value="$page.props.csrf_token">
             <div>
                 <InputLabel for="first_name" value="First name" />
                 <TextInput
                     id="first_name"
+                    name="first_name"
                     v-model="form.first_name"
                     type="text"
                     class="mt-1 block w-full"
@@ -51,6 +54,7 @@ const submit = () => {
                 <InputLabel for="last_name" value="Last name" />
                 <TextInput
                     id="last_name"
+                    name="last_name"
                     v-model="form.last_name"
                     type="text"
                     class="mt-1 block w-full"
@@ -64,6 +68,7 @@ const submit = () => {
                 <InputLabel for="email" value="Email" />
                 <TextInput
                     id="email"
+                    name="email"
                     v-model="form.email"
                     type="email"
                     class="mt-1 block w-full"
@@ -77,6 +82,7 @@ const submit = () => {
                 <InputLabel for="password" value="Password" />
                 <TextInput
                     id="password"
+                    name="password"
                     v-model="form.password"
                     type="password"
                     class="mt-1 block w-full"
@@ -90,6 +96,7 @@ const submit = () => {
                 <InputLabel for="password_confirmation" value="Confirm Password" />
                 <TextInput
                     id="password_confirmation"
+                    name="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
                     class="mt-1 block w-full"

@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
             'vendor_id' => 1,
             'category_id' => 1,
         ]);
-        
+
         Product::create([
             'product_name' => 'Tenis adidas femenino 2023',
             'description' => 'Tenis adidas edición 2023 color negro con puntos blancos',
@@ -60,7 +60,7 @@ class ProductSeeder extends Seeder
             'vendor_id' => 4,
             'category_id' => 3,
         ]);
-        
+
         Product::create([
             'product_name' => 'Camisa azul femenina',
             'description' => 'Camisa azul femenina',
@@ -72,7 +72,7 @@ class ProductSeeder extends Seeder
             'vendor_id' => 4,
             'category_id' => 3,
         ]);
-        
+
         Product::create([
             'product_name' => 'Camisa azul gucci',
             'description' => 'Camisa azul',
@@ -84,5 +84,9 @@ class ProductSeeder extends Seeder
             'vendor_id' => 4,
             'category_id' => 3,
         ]);
+
+        Product::factory()
+            ->count(50)
+            ->create();
     }
 }

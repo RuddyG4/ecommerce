@@ -5,6 +5,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import TextAreaInput from '@/Components/TextAreaInput.vue';
 
 const form = useForm({
     product_name: '',
@@ -54,7 +55,7 @@ function submit() {
 
                             <div>
                                 <InputLabel for="product_description" class="mt-2" value="Product description" />
-                                <TextInput id="product_description" v-model="form.product_description" type="text" class="mt-1 block w-full"
+                                <TextAreaInput id="product_description" v-model="form.product_description" type="text" class="mt-1 block w-full"
                                     required autocomplete="product_description" />
                                 <InputError class="mt-2" :message="form.errors.product_description" />
                             </div>
@@ -109,7 +110,7 @@ function submit() {
                                 <InputLabel for="vendor_id" value="Vendor" />
                                 <select v-model="form.vendor_id" id="vendor_id"
                                     class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    <option value="">Select a brand</option>
+                                    <option value="">Select a vender</option>
                                     <option v-for="vendor in vendors" :key="vendor.id" :value="vendor.id">
                                         {{ vendor.vendor_name }}
                                     </option>
@@ -121,7 +122,7 @@ function submit() {
                                 <InputLabel for="category_id" value="Category" />
                                 <select v-model="form.category_id" id="category_id"
                                     class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    <option value="">Select a product type</option>
+                                    <option value="">Select a category</option>
                                     <option v-for="category in categories" :key="category.id" :value="category.id">
                                         {{ category.category_name }}
                                     </option>

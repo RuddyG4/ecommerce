@@ -25,5 +25,6 @@ class AddCartButton extends Component
             1, 
             $inventory_item->sale_price
         );
+        $this->dispatch('productAddedToCart');
     }
 }

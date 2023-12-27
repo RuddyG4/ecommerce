@@ -9,7 +9,7 @@ class StoreController extends Controller
 {
     public function index()
     {
-        $inventory = Inventory::with('product')->where('branch_id', 1)->get();
+        $inventory = Inventory::with('product')->where('branch_id', 1)->take(8)->get();
         return view('store.index', compact('inventory'));
     }
 
