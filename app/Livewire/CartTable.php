@@ -78,7 +78,7 @@ class CartTable extends Component
         if ($this->qtys[$rowId] != null && $this->qtys[$rowId] > 0) {
             Cart::update($rowId, $this->qtys[$rowId]);
             $this->total = Cart::subtotal();
-            $this->dispatch('productAddedToCart');
+            $this->dispatch('cartUpdated');
         }
     }
 }

@@ -8,10 +8,10 @@ use App\Models\Inventory;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ShippingMethod;
-use App\Models\ShippingTracking;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -50,10 +50,9 @@ class Checkout extends Component
             $data['customer_id'] = Auth::user()->customer->id;
         }
 
-        $cart = Cart::content();
-
         $data['total'] = 0;
-
+        $products = [];
+        $cart = Cart::content();
         foreach ($cart as $item) {
             $orderItem = new OrderItem([
                 'product_id' => $item->id,
@@ -65,23 +64,26 @@ class Checkout extends Component
             ]);
             $data['total'] += $orderItem->total;
             $this->order_lines[] = $orderItem;
+            $products[$item->id] = $item->qty;
         }
 
         $data['order_date'] = now();
         $data['branch_id'] = 1;
 
-        $order = Order::create($data);
-        $track = new ShippingTracking([
-            'order_id' => $order->id,
-            'tracking_name' => 'Sin procesar',
-            'tracking_description' => 'El pedido se ha registrado, pero no se ha procesado',
-            'tracking_datetime' => now(),
-        ]);
-        $order->shippingTrackings()->save($track);
+        DB::transaction(function () use ($data, $products) {
+            foreach ($products as $productId => $qty) {
+                Inventory::where('product_id', $productId)->where('branch_id', $data['branch_id'])->decrement('stock', $qty);
+            }
+            $order = Order::create($data);
+            $order->shippingTrackings()->create([
+                'tracking_name' => 'Sin procesar',
+                'tracking_description' => 'El pedido se ha registrado, pero no se ha procesado',
+                'tracking_datetime' => now(),
+            ]);
 
-        $order->orderItems()->saveMany($this->order_lines);
-
-        Mail::to($data['guest_email'])->send(new OrderUpdated($order));
+            $order->orderItems()->saveMany($this->order_lines);
+            Mail::to($data['guest_email'])->send(new OrderUpdated($order));
+        });
 
         $this->reset('order_lines');
         Cart::destroy();
