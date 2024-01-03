@@ -19,7 +19,7 @@ class Checkout extends Component
 {
     public $cities, $shipping_methods;
     public $first_name, $last_name, $shipping_address1, $shipping_address2, $city_id, $phone, $guest_email, $shipping_method_id = 1, $order_instructions;
-    public $order_lines;
+    public $order_lines = [];
 
     public function render()
     {
@@ -30,7 +30,6 @@ class Checkout extends Component
     {
         $this->cities = City::all();
         $this->shipping_methods = ShippingMethod::all();
-        $this->order_lines = new Collection();
     }
 
     public function createOrder()
@@ -56,9 +55,8 @@ class Checkout extends Component
         $data['total'] = 0;
 
         foreach ($cart as $item) {
-            $inventoryItem = Inventory::find($item->id);
             $orderItem = new OrderItem([
-                'product_id' => $inventoryItem->product_id,
+                'product_id' => $item->id,
                 'qty' => $item->qty,
                 'tax_amount' => 0,
                 'unit_price' => $item->price,
@@ -66,7 +64,7 @@ class Checkout extends Component
                 'total' => $item->price * $item->qty,
             ]);
             $data['total'] += $orderItem->total;
-            $this->order_lines->push($orderItem);
+            $this->order_lines[] = $orderItem;
         }
 
         $data['order_date'] = now();
@@ -81,10 +79,7 @@ class Checkout extends Component
         ]);
         $order->shippingTrackings()->save($track);
 
-        foreach ($this->order_lines as $orderLine) {
-            $orderLine->order_id = $order->id;
-            $orderLine->save();
-        }
+        $order->orderItems()->saveMany($this->order_lines);
 
         Mail::to($data['guest_email'])->send(new OrderUpdated($order));
 

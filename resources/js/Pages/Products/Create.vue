@@ -56,7 +56,7 @@ function submit() {
                             <div>
                                 <InputLabel for="product_description" class="mt-2" value="Product description" />
                                 <TextAreaInput id="product_description" v-model="form.product_description" type="text" class="mt-1 block w-full"
-                                    required autocomplete="product_description" />
+                                    required autocomplete="product_description" rows="3" />
                                 <InputError class="mt-2" :message="form.errors.product_description" />
                             </div>
                             

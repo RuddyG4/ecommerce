@@ -1,6 +1,9 @@
 <!-- Shop Cart Section Begin -->
 <section class="shop-cart spad">
 
+    @php
+    $cart = Cart::content();
+    @endphp
     <div class="container">
 
         @if ( $cart->count() == 0)
@@ -27,7 +30,7 @@
                             @foreach ($cart as $item)
                             <tr>
                                 <td class="cart__product__item">
-                                    <img src="img/shop-cart/cp-1.jpg" alt="">
+                                    <img src="{{ asset('storage'). '/'. $products[$item->id] }}" alt="" width="80">
                                     <div class="cart__product__item__title">
                                         <h6>{{ $item->name}}</h6>
                                         <div class="rating">
@@ -42,13 +45,18 @@
                                 <td class="cart__price">$ {{ $item->price }}</td>
                                 <td class="cart__quantity">
                                     <div class="pro-qty">
-                                        <span class="dec qtybtn" wire:click="decrement( {{ $item->id }})">-</span>
-                                        <input type="text" value="{{ $item->qty}}">
-                                        <span class="inc qtybtn" wire:click="increment( {{ $item->id }})">+</span>
+                                        @if ($item->qty > 1)
+                                        <span class="dec qtybtn" wire:click="decrement( '{{ $item->rowId }}', {{ $item->qty }} )">-</span>
+                                        @else
+                                        <span class="dec qtybtn" style="cursor: not-allowed;">-</span>
+                                        @endif
+                                        {{--- <input type="text" wire:focusin="focusInInput($event.target.value)" wire:focusout="focusOutInput($event.target)" wire:model.live="qtys.{{ $item->rowId }}"> ---}}
+                                        <input type="text" wire:focusout="focusOutInput('{{ $item->rowId }}')" wire:model.live="qtys.{{ $item->rowId }}">
+                                        <span class="inc qtybtn" wire:click="increment( '{{ $item->rowId }}', {{ $item->qty }})">+</span>
                                     </div>
                                 </td>
                                 <td class="cart__total">$ {{ $item->price * $item->qty}}</td>
-                                <td class="cart__close"><span class="icon_close" wire:click="remove({{ $item->id }})"></span></td>
+                                <td class="cart__close"><span class="icon_close" wire:click="remove('{{ $item->rowId }}')"></span></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -59,14 +67,9 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="cart__btn">
-                    <a href="#">Continue Shopping</a>
+                    <a href="{{ route('store.index') }}"><i class="fa fa-chevron-left"></i> &nbsp;&nbsp;&nbsp;Continue Shopping</a>
                 </div>
             </div>
-            <!-- <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="cart__btn update__btn">
-                    <a href="#"><span class="icon_loading"></span> Update cart</a>
-                </div>
-            </div> -->
         </div>
         <div class="row">
             <div class="col-lg-6">

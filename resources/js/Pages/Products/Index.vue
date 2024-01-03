@@ -42,13 +42,15 @@ defineProps({
                                 <tr v-for="product in products.data" :key="product.id">
                                     <td class="p-2 whitespace-nowrap">
                                         <img :src="'storage/' + product.image_path" :alt="product.product_name" class="w-12 inline-block rounded mr-2">
-                                        <b class="cursor-pointer"><u>{{ product.product_name }}</u></b>
+                                        <Link :href="route('products.show', { product: product.id })" class="font-bold py-1 px-4 rounded mr-2">
+                                            <b class="cursor-pointer"><u>{{ product.product_name }}</u></b>
+                                        </Link>
                                     </td>
                                     <td class="p-2 whitespace-nowrap">{{ product.description }}</td>
                                     <td class="p-2 whitespace-nowrap">{{ product.state == 0 ? 'Active' : 'Inactive' }}</td>
                                     <td class="p-2 whitespace-nowrap">{{ product.product_type.name }}</td>
                                     <td>
-                                        <Link :href="route('products.show', { product: product.id })" class="bg-blue-200 text-slate-800 font-bold py-1 px-4 rounded mr-2')">
+                                        <Link :href="route('products.show', { product: product.id })" class="bg-blue-200 text-slate-800 font-bold py-1 px-4 rounded mr-2">
                                         Show <i class="fa-solid fa-eye"></i>
                                         </Link>
                                     </td>

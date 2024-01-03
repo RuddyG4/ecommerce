@@ -19,7 +19,7 @@ class CartCounter extends Component
         $this->cart_count = Cart::count();
     }
 
-    #[On('productAddedToCart')]
+    #[On('cartUpdated')]
     public function updatedCartCount()
     {
         $this->cart_count = Cart::count();

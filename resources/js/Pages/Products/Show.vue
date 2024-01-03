@@ -5,6 +5,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import TextAreaInput from '@/Components/TextAreaInput.vue';
 
 const props = defineProps({
     product: Object,
@@ -56,8 +57,8 @@ function submit() {
 
                             <div>
                                 <InputLabel for="product_description" class="mt-2" value="Product description" />
-                                <TextInput id="product_description" v-model="form.product_description" type="text" class="mt-1 block w-full"
-                                     autocomplete="product_description" />
+                                <TextAreaInput id="product_description" v-model="form.product_description" type="text" class="mt-1 block w-full"
+                                    required autocomplete="product_description" rows="3" />
                                 <InputError class="mt-2" :message="form.errors.product_description" />
                             </div>
                             
