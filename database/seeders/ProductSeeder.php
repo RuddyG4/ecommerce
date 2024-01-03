@@ -85,8 +85,8 @@ class ProductSeeder extends Seeder
             'category_id' => 3,
         ]);
 
-        Product::factory()
-            ->count(50)
-            ->create();
+        // Product::factory()
+        //     ->count(50)
+        //     ->create();
     }
 }
