@@ -42,7 +42,13 @@ function updateBranchData() {
 }
 
 function submit() {
-    form.post(route('inventory.store'));
+    form.post(route('inventory.store'), {
+        onFinish: () => {
+            form.reset('product_id', 'stock', 'sale_price', 'purchase_price')
+            updateBranchData();
+        }
+    });
+    showModal.value = false;
 }
 
 </script>
